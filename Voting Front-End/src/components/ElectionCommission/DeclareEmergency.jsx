@@ -20,7 +20,7 @@ const DeclareEmergency = () => {
     
   return (
     <div>
-        <button onClick={declareEmergency}>Declare Emergency</button>
+        <button className='ec-btn' onClick={declareEmergency}>Declare Emergency</button>
     </div>
   )
 }

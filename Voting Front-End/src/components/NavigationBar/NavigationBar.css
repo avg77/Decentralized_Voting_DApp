@@ -1,6 +1,7 @@
 nav {
     padding: 1rem;
-    border-radius: 20px;
+    background: #0d1239;
+    border-radius: 5px;
     max-width: 100%;
     margin: 0 auto;
     box-shadow: 10px 10px 20px rgba(6, 132, 103, 0.7), -10px -10px 20px rgba(255, 255, 255, 0.1);
@@ -8,16 +9,20 @@ nav {
     top: 0;
     left: 0;
     right: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
   
   ul {
-    list-style-type: none; /* Remove bullets */
+    list-style-type: none; 
     margin: 0;
     padding: 0;
     display: flex;
     gap: 30px;
     position: relative;
-    justify-content: space-between; /* Space out the items */
+    justify-content: space-between; 
   }
   
   li {
@@ -25,21 +30,24 @@ nav {
   }
   
   a {
-    color: #ffffff; /* White text color */
-    text-decoration: none; /* Remove underline */
+    color: #ffffff;
+    text-decoration: none;
     font-size: 1.1rem;
     padding: 5px 20px;
     display: inline-block;
-    background-color: #32045a; /* Match the navbar background */
+    background: #C33764;
+    background: -webkit-linear-gradient(to right, #1D2671, #C33764);
+    background: linear-gradient(to right, #1D2671, #5c142b);
     border-radius: 15px;
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.7), -8px -8px 16px rgba(255, 255, 255, 0.1); /* Raised effect */
-    transition: all 0.3s ease;
-  }
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.7), -8px -8px 16px rgba(255, 255, 255, 0.1);
+}
   
   a:hover {
-    background-color: #230843;
-    color: #f0eeee; /* Slightly lighter on hover */
-  }
+    background: #6f1b36;
+    background: -webkit-linear-gradient(to right, #0d1239, #531629);
+    background: linear-gradient(to right, #0d123c, #320a17);
+    color: #f0eeee;
+}
   
   
   

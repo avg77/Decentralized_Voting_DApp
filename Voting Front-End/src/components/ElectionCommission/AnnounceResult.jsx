@@ -19,7 +19,7 @@ const AnnounceResult = () => {
 
   return (
     <div>
-        <button onClick={announceResult}>Announce Result</button>
+        <button className='ec-btn' onClick={announceResult}>Announce Result</button>
     </div>
   )
 }

@@ -20,7 +20,7 @@ const ResetElection = () => {
     
   return (
     <div>
-        <button onClick={resetElection}>Reset Election</button>
+        <button className='ec-btn' onClick={resetElection}>Reset Election</button>
     </div>
   )
 }

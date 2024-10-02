@@ -1,5 +1,7 @@
 body {
-    background-color: #0a0f2c;
+    background: #000428;  
+    background: -webkit-linear-gradient(to right, #024076, #000428);  
+    background: linear-gradient(to right, #013f75, #000428); 
     color: #00aaff;
     text-align: center;
     padding: 50px;
@@ -13,18 +15,17 @@ h2 {
  */    color: #a0c4ff;
     margin-bottom: 30px;
 }
-.btn-custom {
-    background-color: transparent;
-    border: 2px solid #00aaff;
-    color: #00aaff;
+.cw-btn {
+    background-color: #00aaff;
+    color: #010a0f;
     padding: 10px 20px;
     border-radius: 25px;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: bolder;
 }
-.btn-custom:hover {
-    background-color: #00aaff;
-    color: #0a0f2c;
+.cw-btn:hover {
+    background: orange;
+    color: #0a0000;
 }
 .image-container {
     margin-top: 50px;

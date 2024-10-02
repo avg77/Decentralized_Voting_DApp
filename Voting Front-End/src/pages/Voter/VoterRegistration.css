@@ -8,7 +8,9 @@
   
   /* Main form styling */
   form {
-    background: #0cc2e6;  /*06accd*/
+    background: #36D1DC;  
+    background: -webkit-linear-gradient(to right, #5B86E5, #36D1DC);  
+    background: linear-gradient(to right, #5B86E5, #36D1DC); 
     padding: 30px 40px;
     border-radius: 20px;
     box-shadow: 4px 4px 10px #50a6ed;
@@ -73,31 +75,39 @@
     border: none;
     margin-top: 10px;
     border-radius: 10px;
-    background: #300adb;
+    background: #0575E6;
+    background: -webkit-linear-gradient(to right, #021B79, #0356aa);
+    background: linear-gradient(to right, #021B79, #034f9b);
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.5s ease;
 }
-button {
-    padding: 10px 25px;
+.ec-btn {
+    padding: 10px 15px;
     width: 200px;
     border: none;
     margin-top: 10px;
     border-radius: 10px;
-    background: #dbcd0a;
-    color: rgb(8, 2, 2);
+    background: #FF4E50;
+    background: -webkit-linear-gradient(to right, #dcba10, #f86265);
+    background: linear-gradient(to right, #dfbe19, #fa6668);
+    color: rgb(0, 0, 0);
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.5s ease;
 }
 
-button:hover{
-    background: #968a07;
+.ec-btn:hover{
+  background: #FF4E50;
+  background: -webkit-linear-gradient(to right, #c3a40c, #f64a4d);
+  background: linear-gradient(to right, #c2a510, #f94245);    transform: scale(1.02);
 }
   
   form button:hover {
-    background: #040a7d;
+    background: #0575E6;  
+    background: -webkit-linear-gradient(to right, #011353, #023a72);  
+    background: linear-gradient(to right, #021559, #023971);  
   }
   
   @media (max-width: 450px) {

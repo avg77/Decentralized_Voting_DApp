@@ -21,7 +21,7 @@ function Wallet() {
     <h2>
      Transforming Voting with Blockchain: Secure, Transparent, and Decentralized!
     </h2>
-    <button className="btn btn-custom" onClick={handleWallet}>
+    <button className="cw-btn" onClick={handleWallet}>
      Connect Wallet
     </button>
     <div className="image-container">
