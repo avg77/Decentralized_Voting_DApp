@@ -1,8 +1,10 @@
 # VotiFi - Decentralized Voting Application
 
+
 ## Overview
 
 The **VotiFi - Decentralized Voting Application** is designed to provide a secure and transparent voting experience by leveraging blockchain technology. Utilizing **Ethereum smart contracts**, this application ensures the integrity of the voting process while offering a user-friendly interface for both voters and election administrators. Additionally, the app supports **user authentication** with a backend powered by **Express.js** and **image uploads** powered by **MongoDB** for efficient storage of user data and images.
+
 
 ## Features
 
@@ -13,6 +15,7 @@ The **VotiFi - Decentralized Voting Application** is designed to provide a secur
 - **Image Uploads:** Voter profile images are uploaded and stored securely using MongoDB.
 - **Error Handling with Toast Notifications:** Any errors (e.g., authentication or transaction issues) are displayed with real-time toast notifications for a smooth user experience.
 - **Responsive Design:** Built with React.js and Bootstrap for an optimized experience on any device.
+
 
 ## Technologies Used
 
@@ -33,6 +36,7 @@ The **VotiFi - Decentralized Voting Application** is designed to provide a secur
 - **Backend (Blockchain):**
   - Solidity
   - ethers.js (for frontend - blockchain interactions)
+
     
-- **Deployment:**
-  - Vercel for frontend deployment
+ ## Deployment
+ The application is deployed on Vercel. You can access it at: https://voting-dapp-ten-navy.vercel.app
