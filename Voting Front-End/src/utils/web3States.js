@@ -43,8 +43,8 @@ export const getWeb3State = async() => {
 
 
 
-//0x302e11c7C85609bB4c5308AAf1e9CD0e5e5f92EE - erc20 contract address linked to voting contract
-//0x3F0cD02ccc846Cb4D1aB783Ef02Af96755A07747 - token marketplace/exchange contract address linked to erc20 contract
+//0x302e11c7C85609bB4c5308AAf1e9CD0e5e5f92EE - erc20 contract address linked to voting contract (sepolia)
+//0x3F0cD02ccc846Cb4D1aB783Ef02Af96755A07747 - token marketplace/exchange contract address linked to erc20 contract (sepolia)
 
 //0xe6c75a4bA7A20d5B81d696BE496422e38536A2E7 - voting dapp contract address (linea sepolia)
 //0x82Ef1A01DD5305cAa88Ef1bB3F8fb4789F419b71 - erc20 contract address (linea sepolia) 
