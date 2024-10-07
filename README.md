@@ -38,5 +38,40 @@ The **VotiFi - Decentralized Voting Application** is designed to provide a secur
   - ethers.js (for frontend - blockchain interactions)
 
     
- ## Deployment
- The application is deployed on Vercel. You can access it at: https://voting-dapp-ten-navy.vercel.app
+## To run the project in your local machine, follow these steps: 
+
+### Prerequisites
+- Node.js and npm installed
+- MetaMask extension installed and configured
+
+### Installation
+1. **Clone the Repository:**
+   
+   ```bash
+   git clone <repository-url>
+
+2. **Open the *'Voting Server + Database'* folder in the terminal and run these commands:**
+  - Install server dependencies:
+    
+    ```bash
+    npm install
+    ```
+  - Start the server:
+
+    ```bash
+    npm start
+    ```
+
+3. **Open the *'Voting Front-End'* folder in the terminal and run these commands:**
+
+- Install frontend dependencies:
+
+    ```bash
+    npm install
+    ```
+    
+- Run the frontend application:
+
+    ```bash
+    npm run dev
+    ```
