@@ -3,7 +3,7 @@
 
 ## Overview
 
-The **VotiFi - Decentralized Voting Application** is designed to provide a secure and transparent voting experience by leveraging blockchain technology. Utilizing **Ethereum smart contracts**, this application ensures the integrity of the voting process while offering a user-friendly interface for voters candidates and election commissioners. Additionally, the app supports **user authentication** with a backend powered by **Express.js** and **image uploads** powered by **MongoDB** for efficient storage of user data and images.
+The **VotiFi - Decentralized Voting Application** is designed to provide a secure and transparent voting experience by leveraging blockchain technology. Utilizing **Ethereum smart contracts**, this application ensures the integrity of the voting process while offering a user-friendly interface for voters, candidates and election commissioners. Additionally, the app supports **user authentication** with a backend powered by **Express.js** and **image uploads** powered by **MongoDB** for efficient storage of user data and images.
 
 
 ## Features
