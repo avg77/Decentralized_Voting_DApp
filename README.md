@@ -1,77 +1,132 @@
-# VotiFi - Decentralized Voting Application
+# 🗳️ VotiFi: A Decentralized Voting System Powered by Filecoin & Ethereum
+
+## Track
+- Decentralized Economies, Governance & Science
+
+## 🧠 Problem
+Conventional voting systems—be it digital or manual—are often plagued by:
+- **Centralized control**, leading to possible manipulation or bias.
+- **Lack of transparency**, making it difficult to audit or verify.
+- **No voter privacy** or **limited security guarantees**.
+- **Impermanent data storage**, risking the loss of critical voter/candidate records.
+
+## 💡 Solution
+**VotiFi** is a secure, transparent, and tamper-proof **blockchain-based voting platform**.  
+It leverages:
+- **Ethereum smart contracts** to enforce fair voting logic,
+- **IPFS (via Pinata & Lighthouse)** to store immutable voter/candidate images,
+- **Filecoin** for permanent decentralized storage, and
+- **ERC20 tokens** to gate voting access, ensuring only authorized voters can participate.
+
+Users can:
+- Register as **voters** or **candidates** with image proof.
+- Cast votes during a defined election window.
+- View real-time results and vote counts.
+- Admins can trigger **emergency halts**, reset elections, or announce results.
+
+## 🚀 Architecture
+
+```
+[ Voter/Candidate ]
+       ⬇️ Upload Image
+[ Express + Multer Server ]
+       ⬇️ IPFS (Dual Integration - Pinata & Lighthouse)
+[ Smart Contract Stores CIDs ]
+       ⬇️ Render Images via Gateways
+[ Frontend (React + Ethers.js) ]
+       ⬆️ Smart Contract Interactions
+[ Ethereum + Filecoin Backend ]
+```
+
+### Storage Redundancy
+- IPFS via [Pinata](https://pinata.cloud/)
+- Filecoin-native IPFS via [Lighthouse](https://www.lighthouse.storage/)
+
+> CID fallback is dynamically handled during fetch via gateway URLs.
+
+## 🔗 Bounty Integration
+This project integrates with:
+- **Filecoin/IPFS** via Pinata and Lighthouse SDKs
+- **Permanent Data Preservation** through Filecoin-backed deals
+- **Ethereum** smart contracts for vote logic deployed on Filecoin - Calibration Testnet
+- **ERC-20 Token gating** to validate legitimate voters before they vote
 
 
-## Overview
+## 📦 Tech Stack
 
-The **VotiFi - Decentralized Voting Application** is designed to provide a secure and transparent voting experience by leveraging blockchain technology. Utilizing **Ethereum smart contracts**, this application ensures the integrity of the voting process while offering a user-friendly interface for voters, candidates and election commissioners. Additionally, the app supports **user authentication** with a backend powered by **Express.js** and **image uploads** powered by **MongoDB** for efficient storage of user data and images.
+| Layer             | Stack                                             |
+|------------------|---------------------------------------------------|
+| 💻 Frontend       | React, Vite, Ethers.js, React Router, Toastify    |
+| ⚙️ Backend        | Node.js, Express, Multer, Pinata SDK, Lighthouse SDK |
+| 🧠 Smart Contract | Solidity (OpenZeppelin, ERC20)                    |
+| 🔐 Auth & State   | JWT Auth, MetaMask, Context API                   |
+| 🧠 Blockchain     | Ethereum (Testnet)                                |
+| 📦 Storage        | IPFS + Filecoin (via Pinata & Lighthouse)         |
 
+## 🧪 How to Run
 
-## Features
+### 📦 Install Dependencies
+```bash
+# Root-level
+npm install
 
-- **Blockchain-Based Voting:** Ensures security and transparency through decentralized smart contracts on the Ethereum network.
-- **MetaMask Authentication:** Users can securely log in and sign transactions using MetaMask.
-- **Election Management:** Election commissioners have the ability to start and end voting sessions, ensuring structured elections.
-- **Dynamic Candidate Handling:** Easily manage candidate information, including adding or removing candidates.
-- **Image Uploads:** Voter profile images are uploaded and stored securely using MongoDB.
-- **Error Handling with Toast Notifications:** Any errors (e.g., authentication or transaction issues) are displayed with real-time toast notifications for a smooth user experience.
-- **Responsive Design:** Built with React.js and Bootstrap for an optimized experience on any device.
+# Frontend
+cd Voting\ Front-End
+npm install
 
+# Server
+cd ../Voting\ Server
+npm install
+```
 
-## Technologies Used
+### 🧼 Set Environment Variables
+Create `.env` files in the backend and server directories:
 
-- **Frontend:**
-  - HTML
-  - CSS
-  - Bootstrap 5
-  - JavaScript 
-  - React.js
+#### 🔐 Voting Server `.env`
+```env
+PINATA_API_KEY=your_pinata_api_key
+PINATA_SECRET_API_KEY=your_pinata_secret
+LIGHTHOUSE_API_KEY=your_lighthouse_api_key
+JWT_SECRET=your_jwt_secret
+```
+
+### 🧠 Compile & Deploy Smart Contract
+Use Hardhat or your preferred method (Remix IDE etc):
+
+### 🚀 Start the App
+```bash
+# Server
+cd Voting\ Server
+npm start
+
+# Frontend
+cd ../Voting\ Front-End
+npm run dev
+```
+
+## 🔥 Features
+
+- ✅ Voter & Candidate Registration (with image)
+- ✅ ERC20 Token-gated Voting
+- ✅ Real-time Voting & Vote Count
+- ✅ Image uploads stored permanently (Filecoin + IPFS)
+- ✅ Admin controls: start/halt/end/reset elections
+- ✅ CID fallback logic in image rendering
+- ✅ Fully integrated authentication (JWT + MetaMask)
+
+## 👨‍👩‍👦 Team
+- Solo
+
+| Name    | Role         |
+|---------|--------------|
+| Aviral Gupta  | Full-Stack Dev, Solidity, IPFS/Filecoin Integration, Frontend, Ethers.js, MetaMask |
+
+- Social Handles
+  > [LinkedIn](https://www.linkedin.com/in/guptaaviral/)
   
-- **Backend (Server side):**
-  - Node.js 
-  - Express.js
-
-- **Backend (Database):**
-  - MongoDB (for image storage)
-    
-- **Backend (Blockchain):**
-  - Solidity (for writing smart contracts)
-  - ethers.js (for frontend - blockchain interactions)
-
-    
-## To run the project in your local machine, follow these steps: 
-
-### Prerequisites
-- Node.js and npm installed
-- MetaMask extension installed and configured
-
-### Installation
-1. **Clone the Repository:**
-   
-   ```bash
-   git clone <repository-url>
-
-2. **Open the *'Voting Server + Database'* folder in the terminal and run these commands:**
-  - Install server dependencies:
-    
-    ```bash
-    npm install
-    ```
-  - Start the server:
-
-    ```bash
-    npm start
-    ```
-
-3. **Open the *'Voting Front-End'* folder in the terminal and run these commands:**
-
-- Install frontend dependencies:
-
-    ```bash
-    npm install
-    ```
-    
-- Run the frontend application:
-
-    ```bash
-    npm run dev
-    ```
+  > [X/Twitter](https://x.com/gupta_avi7)
+  
+  > Discord Username: skulz@4808
+  
+## 📝 License
+MIT License. Use it, fork it, build on top of it. Just don’t vote twice 😉
