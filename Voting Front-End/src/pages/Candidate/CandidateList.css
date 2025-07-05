@@ -25,18 +25,4 @@
   color:#333
 }
 
-/* Alternate row background color */
-.even-row {
-  background-color: #ffffff; /* Lighter grey background */
-}
 
-/* Hover effect on rows */
-.even-row:hover,
-.odd-row:hover {
-  background-color: #E2DED0; /* Light grey background on hover */
-}
-
-/* Odd row background color */
-.odd-row {
-  background-color: #ffffff; /* White background */
-}

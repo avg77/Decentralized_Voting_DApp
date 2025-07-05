@@ -16,7 +16,7 @@ const TokenExchange = () => {
 
     useEffect(() => {
         const erc20TokenInit = () => {
-            const contractAddress = "0x82Ef1A01DD5305cAa88Ef1bB3F8fb4789F419b71"
+            const contractAddress = "0xdd8616B3c5966d08d3313249A2CC70516dFe404e"
             const erc20ContractInstance = new ethers.Contract(contractAddress, erc20Abi, signer)
             setErc20ContractInstance(erc20ContractInstance)
         }
@@ -25,7 +25,7 @@ const TokenExchange = () => {
 
     useEffect(() => {
         const tokenExchangeInit = () => {
-            const tokenExchangeContractAddress = "0x9A87dB053B6B5EcbAf6F495e4B65e9F1008b37E9"
+            const tokenExchangeContractAddress = "0x3a4ab5AE178355eC79EA36281785d1C01074E146"
             const tokenExchangeContractInstance = new ethers.Contract(tokenExchangeContractAddress, tokenExchangeAbi, signer)
             setTokenExchangeContractInstance(tokenExchangeContractInstance)
         }

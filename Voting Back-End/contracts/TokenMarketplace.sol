@@ -25,10 +25,6 @@ contract TokenMarketplace{
 
     function calculateTokenPrice() public{
         require(buyerCount!=0, "There must be atleast 1 buyer");
-        //tokenPrice = tokenPrice*(buyerCount/(sellerCount+buyerCount));
-        //using SafeMath library
-        //uint totalParticipants = sellerCount.add(buyerCount);
-        // uint ratioOfBuyerSeller = buyerCount.div(totalParticipants);
         tokenPrice = (tokenPrice.mul(buyerCount)).div(sellerCount);
         emit TokenPriceUpdated(tokenPrice);
     }

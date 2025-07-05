@@ -17,6 +17,7 @@ contract Voting_dApp {
         Gender gender;
         uint8 voteCandidateID;
         address voterAddress;
+        string imageCID;
     }
 
     struct Candidate {
@@ -27,6 +28,7 @@ contract Voting_dApp {
         uint8 candidateID;
         address candidateAddress;
         uint8 votes;
+        string imageCID; 
     }
 
     enum VotingStatus {NotStarted, InProgress, Halted, Ended}
@@ -39,14 +41,15 @@ contract Voting_dApp {
 
     mapping(uint8 => Voter) voterDetails;
     mapping(uint8 => Candidate) candidateDetails;
-    mapping(address => Voter) voterProfile;  //mapping for address-based voter profiles
+    mapping(address => Voter) voterProfile;
+
     bool haltVoting;
     bool endVoting;
 
     IERC20 public aviToken;
 
-    event NewVoterRegistered(string name, uint8 age, Gender gender, uint8 voterID);
-    event NewCandidateRegistered(string name, string party, uint8 age, Gender gender, uint8 candidateID);
+    event NewVoterRegistered(string name, uint8 age, Gender gender, uint8 voterID, string imageCID); 
+    event NewCandidateRegistered(string name, string party, uint8 age, Gender gender, uint8 candidateID, string imageCID);
     event VoteCasted(uint8 voterID, uint8 candidateID);
     event VotingPeriodSet(uint startTime, uint endTime);
     event VotingStatusUpdated(VotingStatus status);
@@ -62,36 +65,34 @@ contract Voting_dApp {
         _;
     }
 
-    function voterRegister(string calldata _name, uint8 _age, Gender _gender) external {
+    function voterRegister(string calldata _name, uint8 _age, Gender _gender, string calldata _imageCID) external {
         require(!haltVoting, "Function disabled due to an emergency!");
         require(msg.sender != electionCommission, "You are from Election Commission!");
         require(_age >= 18, "You are not eligible to vote!");
         require(voterVerification(msg.sender) == true, "Voter already registered!");
 
-        // Creating a new voter struct
-        Voter memory newVoter = Voter(_name, _age, nextVoterID, _gender, 0, msg.sender);
-        
-        // Populating both mappings
-        voterDetails[nextVoterID] = newVoter;   // original uint-based mapping
-        voterProfile[msg.sender] = newVoter;    // address-based mapping
+        Voter memory newVoter = Voter(_name, _age, nextVoterID, _gender, 0, msg.sender, _imageCID); 
 
-        emit NewVoterRegistered(_name, _age, _gender, nextVoterID);
+        voterDetails[nextVoterID] = newVoter;
+        voterProfile[msg.sender] = newVoter;
+
+        emit NewVoterRegistered(_name, _age, _gender, nextVoterID, _imageCID); 
         nextVoterID++;
     }
 
     function voterVerification(address _person) internal view returns (bool) {
         for (uint8 i = 1; i < nextVoterID; i++) {
             if (voterDetails[i].voterAddress == _person) {
-                return false;  // Voter already registered
+                return false;
             }
         }
-        return true;  // Voter not registered
+        return true;
     }
 
     function voterList() public view returns (Voter[] memory) {
         Voter[] memory voterArray = new Voter[](nextVoterID - 1);
         for (uint8 i = 1; i < nextVoterID; i++) {
-            voterArray[i - 1] = voterDetails[i];  // Transferring data from mapping to array
+            voterArray[i - 1] = voterDetails[i];
         }
         return voterArray;
     }
@@ -102,26 +103,25 @@ contract Voting_dApp {
         return voterProfile[_voterAddress];
     }
 
-    function candidateRegister(string calldata _name, Gender _gender, uint8 _age, string calldata _party) external {
+    function candidateRegister(string calldata _name, Gender _gender, uint8 _age, string calldata _party, string calldata _imageCID) external {
         require(!haltVoting, "Function disabled due to an emergency!");
         require(msg.sender != electionCommission, "You are from Election Commission!");
         require(_age >= 18, "You are not eligible to register!");
         require(nextCandidateID < 3, "Candidate registration full!");
         require(candidateVerification(msg.sender) == true, "Candidate already registered!");
 
-        candidateDetails[nextCandidateID] = Candidate(_name, _party, _gender, _age, nextCandidateID, msg.sender, 0);
-        emit NewCandidateRegistered(_name, _party, _age, _gender, nextCandidateID);
+        candidateDetails[nextCandidateID] = Candidate(_name, _party, _gender, _age, nextCandidateID, msg.sender, 0, _imageCID); 
+        emit NewCandidateRegistered(_name, _party, _age, _gender, nextCandidateID, _imageCID); 
         nextCandidateID++;
-
     }
 
     function candidateVerification(address _person) internal view returns (bool) {
         for (uint8 i = 1; i < nextCandidateID; i++) {
             if (candidateDetails[i].candidateAddress == _person) {
-                return false;  // Candidate already registered
+                return false;
             }
         }
-        return true;  // Candidate not registered
+        return true;
     }
 
     function candidateList() public view returns (Candidate[] memory) {
@@ -137,23 +137,23 @@ contract Voting_dApp {
         require(nextVoterID != 1, "Voters have not yet registered!");
         require(nextCandidateID == 3, "Candidates have not yet registered!");
         startTime = block.timestamp + _startTime;
-        endTime = startTime + _endTime; 
+        endTime = startTime + _endTime;
         emit VotingPeriodSet(startTime, endTime);
     }
 
     function votingStatus() public view returns (VotingStatus) {
-    if (haltVoting && !endVoting) {
-        return VotingStatus.Halted;
-    } else if (startTime == 0) {
-        return VotingStatus.NotStarted;
-    } else if (startTime != 0 && block.timestamp < endTime && !endVoting) {
-        return VotingStatus.InProgress;
-    } else if (endVoting) {
+        if (haltVoting && !endVoting) {
+            return VotingStatus.Halted;
+        } else if (startTime == 0) {
+            return VotingStatus.NotStarted;
+        } else if (startTime != 0 && block.timestamp < endTime && !endVoting) {
+            return VotingStatus.InProgress;
+        } else if (endVoting) {
+            return VotingStatus.Ended;
+        } else if (block.timestamp >= endTime) {
+            return VotingStatus.Ended;
+        }
         return VotingStatus.Ended;
-    } else if (block.timestamp >= endTime) {
-        return VotingStatus.Ended;
-    }
-    return VotingStatus.Ended;
     }
 
     function vote(uint8 _voterID, uint8 _candidateID) external {
@@ -161,10 +161,10 @@ contract Voting_dApp {
         require(startTime != 0, "Voting has not started!");
         require(nextCandidateID == 3, "Candidates have not yet registered!");
         require(aviToken.balanceOf(msg.sender) > 0, "You don't have enough tokens to vote!");
-        require(voterDetails[_voterID].voterAddress == msg.sender, "Voter ID mismatch! Ensure you enter your own voter ID!");
+        require(voterDetails[_voterID].voterAddress == msg.sender, "Voter ID mismatch!");
         require(_candidateID > 0 && _candidateID < 3, "Candidate ID not valid!");
         require(voterDetails[_voterID].voteCandidateID == 0, "Voter has already voted!");
-        
+
         voterDetails[_voterID].voteCandidateID = _candidateID;
         candidateDetails[_candidateID].votes++;
         emit VoteCasted(_voterID, _candidateID);
@@ -186,7 +186,7 @@ contract Voting_dApp {
 
         Candidate storage candidate1 = candidateDetails[1];
         Candidate storage candidate2 = candidateDetails[2];
-        
+
         if (candidate1.votes > candidate2.votes) {
             winner = candidate1.candidateAddress;
         } else {
@@ -197,30 +197,26 @@ contract Voting_dApp {
     }
 
     function resetElection() external onlyCommission {
-    require(endVoting, "The current voting process has not ended!");
+        require(endVoting, "The current voting process has not ended!");
 
-    // Reset candidate details
-    for (uint8 i = 1; i < nextCandidateID; i++) {
-        delete candidateDetails[i];
+        for (uint8 i = 1; i < nextCandidateID; i++) {
+            delete candidateDetails[i];
+        }
+        nextCandidateID = 1;
+
+        for (uint8 i = 1; i < nextVoterID; i++) {
+            address voterAddr = voterDetails[i].voterAddress;
+            delete voterDetails[i];
+            delete voterProfile[voterAddr];
+        }
+        nextVoterID = 1;
+
+        startTime = 0;
+        endTime = 0;
+        haltVoting = false;
+        endVoting = false;
+        winner = address(0);
+
+        emit VotingStatusUpdated(VotingStatus.NotStarted);
     }
-    nextCandidateID = 1;
-
-    // Reset voter details
-    for (uint8 i = 1; i < nextVoterID; i++) {
-    address voterAddr = voterDetails[i].voterAddress; // Store the address
-    delete voterDetails[i];                           // Delete voter details
-    delete voterProfile[voterAddr];                   // delete the voter profile
-    }   
-    nextVoterID = 1;
-
-    // Reset other state variables
-    startTime = 0;
-    endTime = 0;
-    haltVoting = false;
-    endVoting = false;
-    winner = address(0);
-
-    emit VotingStatusUpdated(VotingStatus.NotStarted);
-    }
-
 }

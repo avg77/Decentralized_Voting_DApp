@@ -1,4 +1,4 @@
-This code is a React component (`Web3StateProvider`) that acts as a provider for managing and sharing the state of a connected Web3 wallet (such as MetaMask) across the application using React's **Context API**. Let's break down the functionality:
+This code is a React component (`Web3StateProvider`) that acts as a provider for managing and sharing the state of a connected Web3 wallet (such as MetaMask) across the application using React's **Context API**. 
 
 ### 1. **State Management (`web3State`)**
 ```js

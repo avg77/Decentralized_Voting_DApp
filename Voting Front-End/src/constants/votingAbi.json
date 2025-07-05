@@ -55,6 +55,12 @@
 				"internalType": "uint8",
 				"name": "candidateID",
 				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "imageCID",
+				"type": "string"
 			}
 		],
 		"name": "NewCandidateRegistered",
@@ -86,6 +92,12 @@
 				"internalType": "uint8",
 				"name": "voterID",
 				"type": "uint8"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "imageCID",
+				"type": "string"
 			}
 		],
 		"name": "NewVoterRegistered",
@@ -195,6 +207,11 @@
 						"internalType": "uint8",
 						"name": "votes",
 						"type": "uint8"
+					},
+					{
+						"internalType": "string",
+						"name": "imageCID",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Voting_dApp.Candidate[]",
@@ -225,6 +242,11 @@
 			{
 				"internalType": "string",
 				"name": "_party",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_imageCID",
 				"type": "string"
 			}
 		],
@@ -301,6 +323,11 @@
 						"internalType": "address",
 						"name": "voterAddress",
 						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "imageCID",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Voting_dApp.Voter",
@@ -396,6 +423,11 @@
 						"internalType": "address",
 						"name": "voterAddress",
 						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "imageCID",
+						"type": "string"
 					}
 				],
 				"internalType": "struct Voting_dApp.Voter[]",
@@ -422,6 +454,11 @@
 				"internalType": "enum Voting_dApp.Gender",
 				"name": "_gender",
 				"type": "uint8"
+			},
+			{
+				"internalType": "string",
+				"name": "_imageCID",
+				"type": "string"
 			}
 		],
 		"name": "voterRegister",

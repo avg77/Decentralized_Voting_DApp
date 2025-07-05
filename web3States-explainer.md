@@ -25,7 +25,7 @@ To understand the connection between **Metamask**, **ethers.js**, and the **Ethe
   - **Mainnet**: The live network where real transactions happen.
   - **Testnets**: Networks like Ropsten, Rinkeby, or Goerli, where you can test your dApp without using real assets.
   
-### Connection Between Metamask, Ethers.js, and the Ethereum Network in Your Code:
+### Connection Between Metamask, Ethers.js, and the Ethereum Network in Code:
 
 1. **Metamask as the Gateway**:
    - Metamask is the gateway that connects your dApp to the Ethereum network. It provides access to the user’s wallet, their selected network (e.g., Mainnet, Ropsten), and allows your app to interact with the blockchain.
@@ -41,7 +41,7 @@ To understand the connection between **Metamask**, **ethers.js**, and the **Ethe
    - For example, when you create a contract instance with `new ethers.Contract(contractAddress, votingAbi, signer)`, you can read and write data to the Ethereum network.
    - Behind the scenes, Metamask signs your transactions (via the signer) and sends them to the Ethereum network for execution.
 
-### How It All Ties Together in Your Code:
+### How It All Ties Together in Code:
 
 1. **Metamask**:
    - Provides access to the Ethereum account and network (`eth_requestAccounts`, `eth_chainId`).
@@ -61,4 +61,4 @@ To understand the connection between **Metamask**, **ethers.js**, and the **Ethe
 2. **Ethers.js**: Provider and signer are created using ethers.js, connecting to the Ethereum network via Metamask.
 3. **Ethereum Network**: Interactions with the smart contract are executed on the Ethereum network, either fetching data or performing transactions.
 
-Together, Metamask, ethers.js, and the Ethereum network enable your dApp to seamlessly interact with the blockchain.
+Together, Metamask, ethers.js, and the Ethereum network enable the dApp to seamlessly interact with the blockchain.

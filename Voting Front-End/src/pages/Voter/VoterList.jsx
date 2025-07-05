@@ -1,54 +1,78 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { web3Context } from '../../context/web3Context'
-import { useNavigate } from 'react-router-dom'
-import "./VoterList.css"
+import React, { useEffect, useState, useContext } from 'react';
+import { web3Context } from '../../context/web3Context';
+import { useNavigate } from 'react-router-dom';
+import './VoterList.css';
 
 const VoterList = () => {
-  const {web3State} = useContext(web3Context);
-  const {contractInstance}=web3State; 
-  const [voterList,setVoterList]=useState([])
+  const { web3State } = useContext(web3Context);
+  const { contractInstance } = web3State;
+  const [voterList, setVoterList] = useState([]);
+  const navigateTo = useNavigate();
 
-  const token = localStorage.getItem("token")
-  const navigateTo = useNavigate()
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
-     if(!token){
-      navigateTo("/")
-     }
-  },[navigateTo, token])
-    
-    useEffect(()=>{
-      const displayVoterList = async()=>{
-        try {
-            const voterArray = await contractInstance.voterList();
-            setVoterList(voterArray)         
-        } catch (error) {
-            console.log(error.message) 
-        }
+    if (!token) navigateTo("/");
+  }, [navigateTo, token]);
+
+  useEffect(() => {
+    const displayVoterList = async () => {
+      try {
+        const voterArray = await contractInstance.voterList();
+        setVoterList(voterArray);
+      } catch (error) {
+        console.error(error.message);
       }
-      contractInstance && displayVoterList()
-    },[contractInstance])
-    return (  <div className="voter-list-table-container">
-       <br />   
-       {voterList.length!==0? (<table className="voter-list-table">
-        <thead>
+    };
+    contractInstance && displayVoterList();
+  }, [contractInstance]);
+
+  const getImageURL = (imageCIDWithProvider) => {
+    if (!imageCIDWithProvider || typeof imageCIDWithProvider !== 'string') return '';
+
+    const [cid, provider = 'pinata'] = imageCIDWithProvider.split('|');
+    const gatewayMap = {
+      pinata: 'https://gateway.pinata.cloud/ipfs/',
+      lighthouse: 'https://gateway.lighthouse.storage/ipfs/',
+    };
+    const gateway = gatewayMap[provider.toLowerCase()] || gatewayMap.pinata;
+    return `${gateway}${cid}`;
+  };
+
+  return (
+    <div className="voter-list-table-container">
+      <br />
+      {voterList.length !== 0 ? (
+        <table className="voter-list-table">
+          <thead>
             <tr>
-            <th className="voter-list-table-header">Address</th>
-                <th className="voter-list-table-header">Name</th>
-                <th className="voter-list-table-header">Photo</th>
+              <th>Address</th>
+              <th>Name</th>
+              <th>Photo</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             {voterList.map((voter, index) => (
-                <tr key={index} className={index % 2 === 0 ? "even-row" : "odd-row"}>
-                    <td className="voter-list-table-data"><center>{voter.voterAddress}</center></td>
-                    <td className="voter-list-table-data"><center>{voter.name}</center></td>
-                    <td className="voter-list-table-data"><center><img width={"70px"} height={"70px"} src={`http://localhost:3000/images/VoterImages/${voter.voterAddress}.png`}></img></center></td>
-                </tr>
+              <tr key={index}>
+                <td>{voter.voterAddress}</td>
+                <td>{voter.name}</td>
+                <td>
+                  <img
+                    width="70px"
+                    height="70px"
+                    src={getImageURL(voter.imageCID)}
+                    alt="voter"
+                  />
+                </td>
+              </tr>
             ))}
-        </tbody>
-    </table>):(<p>No Voters Found!</p>)}
-    
-</div>);
-}
- 
+          </tbody>
+        </table>
+      ) : (
+        <p>No Voters Found!</p>
+      )}
+    </div>
+  );
+};
+
 export default VoterList;

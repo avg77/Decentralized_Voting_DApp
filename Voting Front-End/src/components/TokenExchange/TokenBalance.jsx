@@ -13,7 +13,7 @@ const TokenBalance = ({erc20ContractInstance}) => {
     useEffect(() => {
         const fetchMarketplaceBalance = async() => {
         try {
-            const tokenBalanceInWei = await erc20ContractInstance.balanceOf("0x9A87dB053B6B5EcbAf6F495e4B65e9F1008b37E9")
+            const tokenBalanceInWei = await erc20ContractInstance.balanceOf("0x3a4ab5AE178355eC79EA36281785d1C01074E146")
             const tokeBalanceInEth = ethers.formatEther(tokenBalanceInWei)
             setMarketplaceBalance(tokeBalanceInEth)
         } catch (error) {
